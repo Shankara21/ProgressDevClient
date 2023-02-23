@@ -1,0 +1,86 @@
+<div
+  class="block p-3 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+>
+  <div class="flex justify-between align-middle py-2">
+    <h5
+      class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white px-3"
+    >
+      List Categories
+    </h5>
+    <a
+      routerLink="/createCategories"
+      class="text-gray-800 bg-gradient-to-r from-[#A0D995] via-[#6CC4A1] to-[#4CACBC] hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 h-fit"
+    >
+      <i class="fa-solid fa-circle-plus"></i> Create
+    </a>
+  </div>
+  <div class="w-1/5 m-3 max-sm:w-1/2">
+    <label
+      for="first_name"
+      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+      >Search</label
+    >
+    <input
+      type="text"
+      id="first_name"
+      [(ngModel)]="term"
+      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-[#A0C3D2] focus:border-[#A0C3D2] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#A0C3D2] dark:focus:border-[#A0C3D2] rounded-xl"
+      placeholder="Input here..."
+    />
+  </div>
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-center text-gray-500 dark:text-gray-400">
+      <thead
+        class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+      >
+        <tr>
+          <th scope="col" class="px-6 py-3">No</th>
+          <th scope="col" class="px-6 py-3">Code</th>
+          <th scope="col" class="px-6 py-3">Name</th>
+          <th scope="col" class="px-6 py-3">Action</th>
+          <!-- <th scope="col" class="px-6 py-3">
+            <span class="sr-only">Edit</span>
+          </th> -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+          *ngFor="
+            let item of categories
+              | filter : term
+              | paginate : { itemsPerPage: itemsPerPage, currentPage: p };
+            index as i
+          "
+        >
+          <th
+            scope="row"
+            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+          >
+            {{ i + 1 }}
+          </th>
+          <!-- <td class="px-6 py-4">Silver</td> -->
+          <td class="px-6 py-4">{{ item.code }}</td>
+          <td class="px-6 py-4">{{ item.name }}</td>
+          <td class="px-6 py-4">
+            <a
+              routerLink="/categories/{{ item.id }}"
+              class="text-gray-800 bg-gradient-to-r from-[#FFEB99] via-[#FDD998] to-[#F5B971] hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+            >
+              <i class="fa-solid fa-pen-to-square"></i> Edit
+            </a>
+            <a
+              (click)="delete(item.id)"
+              class="text-white bg-gradient-to-r from-red-500 via-red-600 to-red-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+            >
+              <i class="fa-solid fa-trash"></i> Delete
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="categories.length" class="text-center m-3">
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
+  </div>
+</div>
