@@ -15,6 +15,11 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { CreateCategoryComponent } from './pages/manage/category/create-category/create-category.component';
+import { LoginComponent } from './pages/auth/login/login.component';
+import { RegisterComponent } from './pages/auth/register/register.component';
+import { IndexProjectComponent } from './pages/manage/project/index-project/index-project.component';
+import { CreateProjectComponent } from './pages/manage/project/create-project/create-project.component';
+import { EditProjectComponent } from './pages/manage/project/edit-project/edit-project.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +29,12 @@ import { CreateCategoryComponent } from './pages/manage/category/create-category
     FooterComponent,
     IndexCategoryComponent,
     EditCategoryComponent,
-    CreateCategoryComponent
+    CreateCategoryComponent,
+    LoginComponent,
+    RegisterComponent,
+    IndexProjectComponent,
+    CreateProjectComponent,
+    EditProjectComponent
   ],
   imports: [
     BrowserModule,

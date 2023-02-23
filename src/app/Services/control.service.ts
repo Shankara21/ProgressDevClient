@@ -44,6 +44,12 @@ export class ControlService {
       .pipe(catchError(this.errorHttpHandler))
   }
 
+  // Projects
+  getProjects() { 
+    return this.HttpClient.get(this.url + 'projects')
+      .pipe(catchError(this.errorHttpHandler))
+  }
+
   //////////////////////
   //!/ Http Methods ///
   ////////////////////

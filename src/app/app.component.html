@@ -1,10 +1,48 @@
-<app-header></app-header>
-<app-sidebar></app-sidebar>
-<div class="p-4 sm:ml-[250px]">
+<app-header
+  *ngIf="
+    !(
+      router.url === '/register' ||
+      router.url === '/login' ||
+      router.url === '/forbidden'
+    )
+  "
+></app-header>
+<app-sidebar
+  *ngIf="
+    !(
+      router.url === '/register' ||
+      router.url === '/login' ||
+      router.url === '/forbidden'
+    )
+  "
+></app-sidebar>
+<div
+  class="p-4 sm:ml-[250px]"
+  *ngIf="
+    !(
+      router.url === '/register' ||
+      router.url === '/login' ||
+      router.url === '/forbidden'
+    );
+    else auth
+  "
+>
   <div
     class="p-4 border-2 border-[#FCFFE7] rounded-lg dark:border-gray-700 mt-14"
   >
     <router-outlet></router-outlet>
   </div>
 </div>
-<app-footer class="lg:flex lg:justify-end lg:ml-10 lg:mr-3"></app-footer>
+<ng-template #auth>
+  <router-outlet></router-outlet>
+</ng-template>
+<app-footer
+  class="lg:flex lg:justify-end lg:ml-10 lg:mr-3"
+  *ngIf="
+    !(
+      router.url === '/register' ||
+      router.url === '/login' ||
+      router.url === '/forbidden'
+    )
+  "
+></app-footer>

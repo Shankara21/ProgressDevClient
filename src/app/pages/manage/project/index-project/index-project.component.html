@@ -1,3 +1,4 @@
+
 <div
   class="block p-3 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
 >
@@ -5,7 +6,7 @@
     <h5
       class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white px-3"
     >
-      List Categories
+      List Projects
     </h5>
     <a
       routerLink="/createCategories"
@@ -35,8 +36,8 @@
       >
         <tr>
           <th scope="col" class="px-6 py-3">No</th>
-          <th scope="col" class="px-6 py-3">Code</th>
           <th scope="col" class="px-6 py-3">Name</th>
+          <th scope="col" class="px-6 py-3">Progress</th>
           <th scope="col" class="px-6 py-3">Action</th>
           <!-- <th scope="col" class="px-6 py-3">
             <span class="sr-only">Edit</span>
@@ -47,7 +48,7 @@
         <tr
           class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
           *ngFor="
-            let item of categories
+            let item of projects
               | filter : term
               | paginate : { itemsPerPage: itemsPerPage, currentPage: p };
             index as i
@@ -60,8 +61,8 @@
             {{ i + 1 }}
           </th>
           <!-- <td class="px-6 py-4">Silver</td> -->
-          <td class="px-6 py-4">{{ item.code }}</td>
           <td class="px-6 py-4">{{ item.name }}</td>
+          <td class="px-6 py-4">{{ item.progress == null ? '0%' : item.progress + '%' }} </td>
           <td class="px-6 py-4">
             <a
               routerLink="/categories/{{ item.id }}"
@@ -79,7 +80,7 @@
         </tr>
       </tbody>
     </table>
-    <div *ngIf="categories.length" class="text-center m-3">
+    <div *ngIf="projects.length" class="text-center m-3">
       <pagination-controls (pageChange)="p = $event"></pagination-controls>
     </div>
   </div>

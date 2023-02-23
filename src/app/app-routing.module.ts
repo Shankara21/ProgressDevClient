@@ -1,3 +1,8 @@
+import { CreateProjectComponent } from './pages/manage/project/create-project/create-project.component';
+import { EditProjectComponent } from './pages/manage/project/edit-project/edit-project.component';
+import { IndexProjectComponent } from './pages/manage/project/index-project/index-project.component';
+import { RegisterComponent } from './pages/auth/register/register.component';
+import { LoginComponent } from './pages/auth/login/login.component';
 import { CreateCategoryComponent } from './pages/manage/category/create-category/create-category.component';
 import { EditCategoryComponent } from './pages/manage/category/edit-category/edit-category.component';
 import { IndexCategoryComponent } from './pages/manage/category/index-category/index-category.component';
@@ -11,6 +16,11 @@ const routes: Routes = [
   { path: 'categories', component: IndexCategoryComponent },
   { path: 'categories/:id', component: EditCategoryComponent },
   { path: 'createCategories', component: CreateCategoryComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'projects', component: IndexProjectComponent },
+  { path: 'projects/:id', component: EditProjectComponent },
+  { path: 'createProject', component: CreateProjectComponent },
 ];
 
 @NgModule({
