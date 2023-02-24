@@ -1,1 +1,64 @@
-<p>create-project works!</p>
+<h5
+  class="pt-3 mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+>
+  Create Project
+</h5>
+<hr />
+<form [formGroup]="form" (submit)="submit()">
+  <div class="grid gap-6 mt-3 mb-6 md:grid-cols-1">
+    <div class="lg:w-2/6">
+      <label
+        for="first_name"
+        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >Name</label
+      >
+      <input
+        type="text"
+        id="first_name"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        placeholder="Name"
+        formControlName="name"
+        required
+      />
+    </div>
+    <div class="lg:w-3/6">
+      <label
+        for="first_name"
+        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >Categories</label
+      >
+      <div class="columns-2">
+        <div
+          class="flex items-center p-1 pl-3 m-1 bg-white border rounded-xl"
+          *ngFor="let item of categories; index as i"
+        >
+          <input
+            id="{{ i + 1 }}"
+            type="checkbox"
+            formControlName="category"
+            [(ngModel)]="item.checked"
+            (change)="updateSelectedValues()"
+            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+          />
+          <label
+            for="{{ i + 1 }}"
+            class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+            >{{ item.code }} ({{ item.name }})</label
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  <button
+    type="submit"
+    class="text-white bg-[#3E54AC] hover:bg-[#2B3467] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center sm:mr-2 max-sm:mb-3"
+  >
+    Submit
+  </button>
+  <button
+    type="reset"
+    class="text-white bg-[#93BFCF] hover:bg-[#6096B4] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+  >
+    Reset
+  </button>
+</form>

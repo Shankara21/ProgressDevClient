@@ -14,6 +14,15 @@ export class ControlService {
     })
   }
 
+  public id: any;
+  public username: any;
+  public fullname: any;
+  public email: any;
+  public userLevel: any;
+
+  public path: any;
+
+  public data: any;
   //////////////////////
   //?/ Http Methods ///
   ////////////////////
@@ -45,8 +54,52 @@ export class ControlService {
   }
 
   // Projects
-  getProjects() { 
+  getProjects() {
     return this.HttpClient.get(this.url + 'projects')
+      .pipe(catchError(this.errorHttpHandler))
+  }
+
+  // ProjectsDetails
+  createProjectDetails(params: any) {
+    return this.HttpClient.post(this.url + `projectdetails`, params)
+      .pipe(catchError(this.errorHttpHandler))
+  }
+  getByStatus(status: any, projectId: any) {
+    return this.HttpClient.get(this.url + `projectdetails/status/${status}/${projectId}`)
+      .pipe(catchError(this.errorHttpHandler))
+  }
+
+  // Auth
+  login(params: any) {
+    return this.HttpClient.post(this.url + 'users/login', params)
+  }
+  register(params: any) {
+    return this.HttpClient.post(this.url + 'users/register', params)
+  }
+  logout(params: any) {
+    return this.HttpClient.delete(this.url + `users/logout/${params}`)
+      .pipe(catchError(this.errorHttpHandler))
+  }
+  refreshToken(params: any) {
+    return this.HttpClient.post(this.url + `users/refreshToken`, params)
+      .pipe(catchError(this.errorHttpHandler))
+  }
+
+  // User
+  getUser() {
+    return this.HttpClient.get(this.url + 'users')
+      .pipe(catchError(this.errorHttpHandler))
+  }
+  findUser(id: any) {
+    return this.HttpClient.get(this.url + `users/${id}`)
+      .pipe(catchError(this.errorHttpHandler))
+  }
+  deleteUser(id: any) {
+    return this.HttpClient.delete(this.url + `users/${id}`)
+      .pipe(catchError(this.errorHttpHandler))
+  }
+  updateUser(id: any, params: any) {
+    return this.HttpClient.put(this.url + `users/${id}`, params)
       .pipe(catchError(this.errorHttpHandler))
   }
 

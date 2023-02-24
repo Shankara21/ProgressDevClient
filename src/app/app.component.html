@@ -17,7 +17,7 @@
   "
 ></app-sidebar>
 <div
-  class="p-4 sm:ml-[250px]"
+  class="p-4 lg:ml-[240px] md:ml-[190px]"
   *ngIf="
     !(
       router.url === '/register' ||
@@ -37,7 +37,7 @@
   <router-outlet></router-outlet>
 </ng-template>
 <app-footer
-  class="lg:flex lg:justify-end lg:ml-10 lg:mr-3"
+  class="sm:flex sm:justify-end sm:mr-3"
   *ngIf="
     !(
       router.url === '/register' ||
