@@ -1,35 +1,25 @@
-<div
-  class="block p-3 bg-white border border-gray-200 rounded-lg shadow "
->
+<div class="block p-3 bg-white border border-gray-200 rounded-lg shadow">
   <div class="flex justify-between py-2 align-middle">
-    <h5
-      class="px-3 mb-2 text-3xl font-bold tracking-tight text-gray-900 "
-    >
+    <h5 class="px-3 mb-2 text-3xl font-bold tracking-tight text-gray-900">
       Project Details
     </h5>
   </div>
   <div class="w-1/5 m-3 max-sm:w-1/2">
-    <label
-      for="first_name"
-      class="block mb-2 text-sm font-medium text-gray-900 "
+    <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900"
       >Search</label
     >
     <input
       type="text"
       id="first_name"
       [(ngModel)]="term"
-      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-[#A0C3D2] focus:border-[#A0C3D2] block w-full p-2.5  rounded-xl"
+      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-[#A0C3D2] focus:border-[#A0C3D2] block w-full p-2.5 rounded-xl"
       placeholder="Input here..."
     />
   </div>
-  <h3 class="my-3 ml-2 text-2xl font-bold text-gray-700 ">
-    List Document Done
-  </h3>
+  <h3 class="my-3 ml-2 text-2xl font-bold text-gray-700">List Document Done</h3>
   <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-    <table class="w-full text-sm text-center text-gray-500 ">
-      <thead
-        class="text-xs text-gray-700 uppercase bg-gray-50  "
-      >
+    <table class="w-full text-sm text-center text-gray-500">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50">
         <tr>
           <th scope="col" class="px-6 py-3">No</th>
           <th scope="col" class="px-6 py-3">Document</th>
@@ -46,7 +36,7 @@
         </tr>
         <ng-template #tes>
           <tr
-            class="bg-white border-b  hover:bg-gray-50 "
+            class="bg-white border-b hover:bg-gray-50"
             *ngFor="
               let item of projectDone
                 | filter : term
@@ -56,7 +46,7 @@
           >
             <th
               scope="row"
-              class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
+              class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
             >
               {{ i + 1 }}
             </th>
@@ -65,47 +55,41 @@
             </td>
             <td class="px-6 py-4">
               <span
-                class="px-4 py-2 text-xs font-medium text-green-800 bg-green-100 rounded-full "
+                class="px-4 py-2 text-xs font-medium text-green-800 bg-green-100 rounded-full"
                 >{{ item.status == 0 ? "Progress" : "Done" }}</span
               >
             </td>
             <td class="px-6 py-4">
               <!-- Modal toggle -->
               <button
-                data-modal-target="defaultModal"
-                data-modal-toggle="defaultModal"
-                class="text-white bg-gradient-to-r from-[#BD3246] via-[#8D0033] to-[#740021] hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 w-fit"
+                data-modal-target="large-modal"
+                data-modal-toggle="large-modal"
+                class="text-white bg-gradient-to-r from-[#BD3246] via-[#8D0033] to-[#740021] hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 w-fit"
                 type="button"
-                (click)="getPath('bg.jpg')"
+                (click)="getPath(item.document, item.Category.name)"
               >
                 <i class="fa-solid fa-file"></i> File
               </button>
-
               <!-- Main modal -->
               <div
-                id="defaultModal"
+                id="large-modal"
                 tabindex="-1"
-                aria-hidden="true"
                 class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full"
               >
-                <div class="relative w-full h-full max-w-2xl md:h-auto">
+                <div class="relative w-full h-full max-w-4xl md:h-auto">
                   <!-- Modal content -->
-                  <div
-                    class="relative bg-white rounded-lg shadow "
-                  >
+                  <div class="relative bg-white rounded-lg shadow">
                     <!-- Modal header -->
                     <div
-                      class="flex items-start justify-between p-4 border-b rounded-t "
+                      class="flex items-center justify-between p-5 border-b rounded-t"
                     >
-                      <h3
-                        class="text-xl font-semibold text-gray-900 "
-                      >
-                        Preview PDF
+                      <h3 class="text-xl font-medium text-gray-900">
+                        Document {{ documentName }}
                       </h3>
                       <button
                         type="button"
-                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center  "
-                        data-modal-hide="defaultModal"
+                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
+                        data-modal-hide="large-modal"
                       >
                         <svg
                           aria-hidden="true"
@@ -125,43 +109,34 @@
                     </div>
                     <!-- Modal body -->
                     <div class="p-6 space-y-6">
-                      <img src="{{ path }}" alt="" />
+                      <ngx-extended-pdf-viewer
+                        [src]="path"
+                        width="100%"
+                        height="100%"
+                      ></ngx-extended-pdf-viewer>
                     </div>
                     <!-- Modal footer -->
-                    <div
-                      class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b "
+                    <!-- <div
+                      class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b"
                     >
                       <button
-                        data-modal-hide="defaultModal"
+                        data-modal-hide="large-modal"
                         type="button"
-                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
+                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                       >
                         I accept
                       </button>
                       <button
-                        data-modal-hide="defaultModal"
+                        data-modal-hide="large-modal"
                         type="button"
-                        class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10  "
+                        class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10"
                       >
                         Decline
                       </button>
-                    </div>
+                    </div> -->
                   </div>
                 </div>
               </div>
-
-              <!-- <a
-                  routerLink="/projects/{{ item.id }}"
-                  class="text-white bg-gradient-to-r from-[#BD3246] via-[#8D0033] to-[#740021] hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 w-fit"
-                >
-                  <i class="fa-solid fa-file"></i> File
-                </a> -->
-              <!-- <a
-              (click)="delete(item.id)"
-              class="text-white bg-gradient-to-r from-red-500 via-red-600 to-red-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 w-fit"
-            >
-              <i class="fa-solid fa-trash"></i> Delete
-            </a> -->
             </td>
           </tr>
         </ng-template>
@@ -171,36 +146,38 @@
       <pagination-controls (pageChange)="p = $event"></pagination-controls>
     </div>
   </div>
-  <h3 class="my-3 ml-2 text-2xl font-bold text-gray-700 ">
+  <h3 class="my-3 ml-2 text-2xl font-bold text-gray-700">
     Update progress Document
   </h3>
   <div class="relative p-3 overflow-x-auto shadow-md sm:rounded-lg">
-    <form [formGroup]="form">
+    <form [formGroup]="form" (submit)="submit()">
       <div class="lg:w-1/2">
         <label
           for="first_name"
-          class="block mb-2 text-sm font-medium text-gray-900 "
+          class="block mb-2 text-sm font-medium text-gray-900"
           >Document</label
         >
         <select
           id="countries"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5   "
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          formControlName="categoryId"
         >
-          <option *ngFor="let item of projectsProgress; index as i">
+          <option *ngFor="let item of projectsProgress; index as i" value="{{ item.id }}">
             {{ item.Category.code }} ({{ item.Category.name }})
           </option>
         </select>
       </div>
       <div class="my-3 lg:w-1/2">
         <label
-          class="block mb-2 text-sm font-medium text-gray-900 "
+          class="block mb-2 text-sm font-medium text-gray-900"
           for="file_input"
           >Upload file</label
         >
         <input
-          class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50  focus:outline-none   "
+          class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
           id="file_input"
           type="file"
+          formControlName="document" (change)="onChange($event)"
         />
       </div>
       <div class="mt-6 lg:ml-32">

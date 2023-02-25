@@ -68,6 +68,10 @@ export class ControlService {
     return this.HttpClient.get(this.url + `projectdetails/status/${status}/${projectId}`)
       .pipe(catchError(this.errorHttpHandler))
   }
+  updateProjectDetails(params: any) {
+    return this.HttpClient.put(this.url + `projectdetails`, params)
+      .pipe(catchError(this.errorHttpHandler))
+  }
 
   // Auth
   login(params: any) {
