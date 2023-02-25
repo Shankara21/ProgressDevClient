@@ -142,7 +142,7 @@
         </ng-template>
       </tbody>
     </table>
-    <div *ngIf="projectDone.length" class="m-3 text-center">
+    <div *ngIf="projectDone.length > 6" class="m-3 text-center">
       <pagination-controls (pageChange)="p = $event"></pagination-controls>
     </div>
   </div>
