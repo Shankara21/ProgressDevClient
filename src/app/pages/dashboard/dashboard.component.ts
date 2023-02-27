@@ -4,7 +4,9 @@ import { Router } from '@angular/router';
 import jwt_decode from 'jwt-decode';
 import { CookieService } from "ngx-cookie-service";
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Chart, registerables } from 'chart.js'
 
+Chart.register(...registerables)
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -15,7 +17,14 @@ export class DashboardComponent implements OnInit {
   decoded: any;
   refreshToken: any;
   id: any
+
+  // projects
+  name: any[] = [];
+  progress: any[] = [];
   constructor(private elementRef: ElementRef, public ControlService: ControlService, private router: Router, private cookieService: CookieService) { }
+  // public chart: any;
+
+  projectChart: any;
   ngOnInit(): void {
     const token = this.cookieService.get('progressDevToken');
 
@@ -45,5 +54,41 @@ export class DashboardComponent implements OnInit {
         userLevel: this.decoded.userLevel
       }
     });
+
+    // Get Project
+    this.ControlService.getProjects().subscribe((res: any) => {
+      this.name = res.map((item: any) => item.name);
+      this.progress = res.map((item: any) => item.progress);
+      this.projectChart = new Chart("progressChart", {
+
+        type: 'bar',
+        data: {
+          labels: this.name,
+          datasets: [{
+            label: 'Progress',
+            data: this.progress,
+            backgroundColor: [
+              'rgba(255, 99, 132)',
+              'rgba(54, 162, 235)',
+              'rgba(255, 206, 86)',
+              'rgba(75, 192, 192)',
+              'rgba(153, 102, 255)',
+              'rgba(255, 159, 64)'
+            ],
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            // set scales begin at 0 and end at 100
+            y: {
+              beginAtZero: true,
+              max: 100
+            }
+          }
+        }
+      })
+    })
   }
 }

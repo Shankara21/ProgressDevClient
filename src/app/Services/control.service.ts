@@ -58,6 +58,10 @@ export class ControlService {
     return this.HttpClient.get(this.url + 'projects')
       .pipe(catchError(this.errorHttpHandler))
   }
+  showProject(params: any) {
+    return this.HttpClient.get(this.url + `projects/${params}`)
+      .pipe(catchError(this.errorHttpHandler))
+  }
 
   // ProjectsDetails
   createProjectDetails(params: any) {

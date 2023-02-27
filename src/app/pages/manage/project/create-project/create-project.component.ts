@@ -10,6 +10,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class CreateProjectComponent implements OnInit {
 
+  errorMsg: any;
   constructor(public ControlService: ControlService, private router: Router) { }
   categories: any[] = [];
   form!: FormGroup;
@@ -29,8 +30,12 @@ export class CreateProjectComponent implements OnInit {
   }
   submit() {
     this.form.value.category = this.selectedValues;
-    this.ControlService.createProjectDetails(this.form.value).subscribe((data: any) => {
-      this.router.navigate(['/projects']);
-    });
+    if (this.form.value.name == '') {
+      this.errorMsg = 'Please enter project name';
+    } else {
+      this.ControlService.createProjectDetails(this.form.value).subscribe((data: any) => {
+        this.router.navigate(['/projects']);
+      });
+    }
   }
 }

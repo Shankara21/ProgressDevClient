@@ -20,6 +20,7 @@ import { RegisterComponent } from './pages/auth/register/register.component';
 import { IndexProjectComponent } from './pages/manage/project/index-project/index-project.component';
 import { CreateProjectComponent } from './pages/manage/project/create-project/create-project.component';
 import { EditProjectComponent } from './pages/manage/project/edit-project/edit-project.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,6 +46,7 @@ import { EditProjectComponent } from './pages/manage/project/edit-project/edit-p
     NgxPaginationModule,
     Ng2SearchPipeModule,
     NgxExtendedPdfViewerModule,
+    NgApexchartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
