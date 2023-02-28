@@ -67,6 +67,7 @@ export class DashboardComponent implements OnInit {
           datasets: [{
             label: 'Progress',
             data: this.progress,
+            borderWidth: 0,
             backgroundColor: [
               'rgba(255, 99, 132)',
               'rgba(54, 162, 235)',
@@ -81,11 +82,17 @@ export class DashboardComponent implements OnInit {
           responsive: true,
           maintainAspectRatio: false,
           scales: {
-            // set scales begin at 0 and end at 100
+            // Menambahkan % pada yAxis
             y: {
               beginAtZero: true,
-              max: 100
-            }
+              max: 100,
+              ticks: {
+                callback: function (value: any) {
+                  return value + '%';
+                }
+              }
+            },
+
           }
         }
       })

@@ -60,13 +60,22 @@ export class EditProjectComponent implements OnInit {
   progressChart: any;
   progress: any;
 
+  // detailsProject
+  detailsProject: any;
+  nextProcess: any;
+
   // updateData
   document!: File;
+
+  // create obstacle
+  obstacleForm!: FormGroup;
   ngOnInit(): void {
 
     this.ControlService.getByStatus(0, this.paramsId).subscribe((data: any) => {
       this.tempOnProgress = data;
       this.projectsProgress = this.tempOnProgress.projectDone;
+      this.nextProcess = this.projectsProgress[0].Category;
+
     })
     this.ControlService.getByStatus(1, this.paramsId).subscribe((data: any) => {
       this.tempDone = data;
@@ -80,6 +89,7 @@ export class EditProjectComponent implements OnInit {
     })
 
     this.ControlService.showProject(this.paramsId).subscribe((data: any) => {
+      this.detailsProject = data;
       this.progress = data.progress;
       this.chartOptions = {
         series: [this.progress],
@@ -126,6 +136,19 @@ export class EditProjectComponent implements OnInit {
         labels: ["Done"]
       };
     })
+
+    this.obstacleForm = new FormGroup({
+      obstacle: new FormControl('', [Validators.required]),
+      id: new FormControl('', [Validators.required]),
+    })
+  }
+  obstacleSubmit(){
+    this.obstacleForm.value.id = this.paramsId;
+    this.ControlService.createObstacle(this.obstacleForm.value).subscribe((data: any) => {
+      this.ControlService.showProject(this.paramsId).subscribe((data: any) => {
+        this.detailsProject = data;
+      })
+    })
   }
   onChange(event: any) {
     this.document = event.target.files[0];
@@ -153,7 +176,7 @@ export class EditProjectComponent implements OnInit {
       this.ControlService.getByStatus(0, this.paramsId).subscribe((data: any) => {
         this.tempOnProgress = data;
         this.projectsProgress = this.tempOnProgress.projectDone;
-        // console.log(this.projectsProgress);
+        this.nextProcess = this.projectsProgress[0].Category;
       })
       this.ControlService.getByStatus(1, this.paramsId).subscribe((data: any) => {
         this.tempDone = data;
@@ -161,6 +184,9 @@ export class EditProjectComponent implements OnInit {
         // console.log(this.tempDone);
       })
       this.ControlService.showProject(this.paramsId).subscribe((data: any) => {
+        // this.detailsProject = data;
+        // console.log(this.detailsProject);
+
         this.progress = data.progress;
         this.chartOptions = {
           series: [this.progress],

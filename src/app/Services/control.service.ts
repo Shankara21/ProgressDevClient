@@ -62,6 +62,10 @@ export class ControlService {
     return this.HttpClient.get(this.url + `projects/${params}`)
       .pipe(catchError(this.errorHttpHandler))
   }
+  createObstacle(params: any) {
+    return this.HttpClient.post(this.url + `projects/createObstacle`, params)
+      .pipe(catchError(this.errorHttpHandler))
+  }
 
   // ProjectsDetails
   createProjectDetails(params: any) {

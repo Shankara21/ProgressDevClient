@@ -146,7 +146,7 @@
       <pagination-controls (pageChange)="p = $event"></pagination-controls>
     </div>
   </div>
-  <div class="grid lg:grid-cols-2 gap-4 text-center">
+  <div class="grid gap-4 text-center lg:grid-cols-2">
     <div>
       <h3 class="my-3 ml-2 text-2xl font-bold text-gray-700">
         Progress Project
@@ -168,9 +168,9 @@
         </ng-template>
       </div>
       <div
-        class="block max-w-sm py-3 px-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 text-left"
+        class="block max-w-sm px-6 py-3 text-left bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100"
       >
-        <div class="flex justify-end">
+        <div class="flex justify-end " *ngIf="!detailsProject.obstacle">
           <button
             data-modal-target="small-modal"
             data-modal-toggle="small-modal"
@@ -215,8 +215,8 @@
                 </button>
               </div>
               <!-- Modal body -->
-              <div class="py-2 px-6 space-y-6">
-                <form>
+              <div class="px-6 py-2 space-y-6">
+                <form [formGroup]="obstacleForm" (submit)="obstacleSubmit()">
                   <div class="mb-6">
                     <label
                       for="email"
@@ -224,10 +224,11 @@
                       >Obstacle</label
                     >
                     <input
-                      type="email"
+                      type="text"
                       id="email"
                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                      placeholder="name@flowbite.com"
+                      placeholder="Obstacle"
+                      formControlName="obstacle"
                       required
                     />
                   </div>
@@ -244,15 +245,16 @@
           </div>
         </div>
 
-        <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-700">
-          Next Process :
+        <h5 class="my-2 text-base font-bold tracking-tight text-gray-700">
+          Next Process : <span>{{ nextProcess.code }} ({{ nextProcess.name }})</span>
         </h5>
-        <h5 class="text-gray-700 text-base font-bold">Obstacle :</h5>
-        <ul class="max-w-md space-y-1 text-gray-500 list-disc list-inside">
-          <li>At least 10 characters (and up to 100 characters)</li>
-          <li>At least one lowercase character</li>
-          <li>Inclusion of at least one special character, e.g., ! @ # ?</li>
+        <h5 class="text-base font-bold text-gray-700">Obstacle :</h5>
+        <p class="text-base text-center text-gray-700" *ngIf="!detailsProject.obstacle; else show">Belum ada obstacle</p>
+        <ng-template #show>
+          <ul class="max-w-md space-y-1 text-gray-500 list-disc list-inside">
+          <li>{{ detailsProject.obstacle }}</li>
         </ul>
+        </ng-template>
         <!-- <div class="font-normal text-gray-700">
           <ul>
             <li>satu</li>
@@ -264,7 +266,7 @@
       <h3 class="my-3 ml-2 text-2xl font-bold text-gray-700">
         Update progress Document
       </h3>
-      <div class="relative p-3 overflow-x-auto sm:rounded-lg text-left">
+      <div class="relative p-3 overflow-x-auto text-left sm:rounded-lg">
         <form [formGroup]="form" (submit)="submit()">
           <div class="">
             <label
