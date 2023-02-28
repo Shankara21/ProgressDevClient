@@ -68,6 +68,7 @@ export class DashboardComponent implements OnInit {
             label: 'Progress',
             data: this.progress,
             borderWidth: 0,
+            borderRadius: 20,
             backgroundColor: [
               'rgba(255, 99, 132)',
               'rgba(54, 162, 235)',

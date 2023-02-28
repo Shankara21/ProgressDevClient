@@ -6,9 +6,9 @@
   "
   class="min-h-screen"
 >
-  <div style="background: rgba(234, 199, 199, 0.6)" class="min-h-screen">
+  <div  class="min-h-screen">
     <div
-      class="w-full max-w-xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 target-center"
+      class="w-full max-w-xl p-4 shadow-2xl rounded-3xl sm:p-6 md:p-8 target-center target-blur"
     >
       <form class="m-auto space-y-6" [formGroup]="form" (submit)="submit()">
         <div class="flex items-center justify-center">
@@ -17,9 +17,6 @@
             ProgressDev
           </h5>
         </div>
-        <h5 class="text-xl font-medium text-center text-gray-900">
-          Create your account
-        </h5>
         <div
           *ngIf="errorMsg"
           id="alert-2"
@@ -143,15 +140,17 @@
             />
           </div>
         </div>
-        <button
+        <div class="text-center">
+          <button
           type="submit"
-          class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+          class="w-3/4 text-white bg-[#F99417] hover:bg-[#F2921D] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
         >
           Register
         </button>
-        <div class="text-sm font-medium text-gray-500">
+        </div>
+        <div class="text-sm font-medium text-center text-gray-500">
           Already have an account?
-          <a routerLink="/login" class="text-blue-700 hover:underline">Login</a>
+          <a routerLink="/login" class="text-[#FFB84C] hover:underline">Login</a>
         </div>
       </form>
     </div>

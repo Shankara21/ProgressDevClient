@@ -168,7 +168,7 @@
         </ng-template>
       </div>
       <div
-        class="block max-w-sm px-6 py-3 text-left bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100"
+        class="block w-full px-6 py-3 text-left bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100"
       >
         <div class="flex justify-end " *ngIf="!detailsProject.obstacle">
           <button
@@ -244,8 +244,7 @@
             </div>
           </div>
         </div>
-
-        <h5 class="my-2 text-base font-bold tracking-tight text-gray-700">
+        <h5 class="my-2 text-base font-bold tracking-tight text-gray-700 ">
           Next Process : <span>{{ nextProcess.code }} ({{ nextProcess.name }})</span>
         </h5>
         <h5 class="text-base font-bold text-gray-700">Obstacle :</h5>
@@ -255,11 +254,6 @@
           <li>{{ detailsProject.obstacle }}</li>
         </ul>
         </ng-template>
-        <!-- <div class="font-normal text-gray-700">
-          <ul>
-            <li>satu</li>
-          </ul>
-        </div> -->
       </div>
     </div>
     <div>
