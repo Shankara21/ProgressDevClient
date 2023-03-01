@@ -15,14 +15,19 @@ export class CreateProjectComponent implements OnInit {
   categories: any[] = [];
   form!: FormGroup;
   selectedValues: any[] = [];
+  sections: any[] = []
+  redirect: any;
   ngOnInit(): void {
     this.ControlService.getCategories().subscribe((data: any) => {
       this.categories = data.map((item: any) => ({ ...item, checked: false }));
-
     });
+    this.ControlService.getSections().subscribe((data: any) => {
+      this.sections = data;
+    })
     this.form = new FormGroup({
       name: new FormControl('', [Validators.required]),
       category: new FormControl('', [Validators.required]),
+      sectionId: new FormControl('', [Validators.required]),
     })
   }
   updateSelectedValues() {
@@ -33,9 +38,12 @@ export class CreateProjectComponent implements OnInit {
     if (this.form.value.name == '') {
       this.errorMsg = 'Please enter project name';
     } else {
-      this.ControlService.createProjectDetails(this.form.value).subscribe((data: any) => {
-        this.router.navigate(['/projects']);
-      });
+      this.ControlService.showSection(this.form.value.sectionId).subscribe((data: any) => {
+        this.redirect = data.code;
+        this.ControlService.createProjectDetails(this.form.value).subscribe((data: any) => {
+          this.router.navigate([`projects/${this.redirect.toLowerCase()}`]);
+        });
+      })
     }
   }
 }

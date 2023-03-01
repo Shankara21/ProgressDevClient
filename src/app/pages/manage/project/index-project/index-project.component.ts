@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { ControlService } from 'src/app/Services/control.service';
 import { Component } from '@angular/core';
 
@@ -7,7 +8,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./index-project.component.css']
 })
 export class IndexProjectComponent {
-  constructor(private ControlService: ControlService) { }
+  constructor(private ControlService: ControlService, private router: Router) { }
   // pagination
   p: number = 1;
   itemsPerPage: number = 10;
@@ -16,17 +17,24 @@ export class IndexProjectComponent {
   // search
   term: any;
 
+  // params
+  params = this.router.url.split('/')[2];
 
+  // Project
   projects: any[] = [];
+  sectionFound: any;
   ngOnInit(): void {
-    this.ControlService.getProjects().subscribe((data: any) => {
-      this.projects = data;
+    // menampilkan route sekarang
+    this.ControlService.getProjects(this.params).subscribe((data: any) => {
+      this.projects = data.projects;
+      this.sectionFound = data.sectionFound;
     })
   }
   delete(id: any) {
-    this.ControlService.deleteCategory(id).subscribe((data: any) => {
-      this.ControlService.getCategories().subscribe((data: any) => {
-        this.projects = data;
+    this.ControlService.deleteProject(id).subscribe((data: any) => {
+      this.ControlService.getProjects(this.params).subscribe((data: any) => {
+        this.projects = data.projects;
+        this.sectionFound = data.sectionFound;
       })
     })
   }

@@ -54,16 +54,24 @@ export class ControlService {
   }
 
   // Projects
-  getProjects() {
-    return this.HttpClient.get(this.url + 'projects')
+  getAllProjects() {
+    return this.HttpClient.get(this.url + 'projects/index')
+      .pipe(catchError(this.errorHttpHandler))
+  }
+  getProjects(params: any) {
+    return this.HttpClient.get(this.url + 'projects/filter/' + params)
       .pipe(catchError(this.errorHttpHandler))
   }
   showProject(params: any) {
-    return this.HttpClient.get(this.url + `projects/${params}`)
+    return this.HttpClient.get(this.url + `projects/find/${params}`)
       .pipe(catchError(this.errorHttpHandler))
   }
   createObstacle(params: any) {
     return this.HttpClient.post(this.url + `projects/createObstacle`, params)
+      .pipe(catchError(this.errorHttpHandler))
+  }
+  deleteProject(params: any) {
+    return this.HttpClient.delete(this.url + `projectdetails/${params}`)
       .pipe(catchError(this.errorHttpHandler))
   }
 
@@ -112,6 +120,16 @@ export class ControlService {
   }
   updateUser(id: any, params: any) {
     return this.HttpClient.put(this.url + `users/${id}`, params)
+      .pipe(catchError(this.errorHttpHandler))
+  }
+
+  // Section
+  getSections() {
+    return this.HttpClient.get(this.url + 'sections')
+      .pipe(catchError(this.errorHttpHandler))
+  }
+  showSection(id: any) {
+    return this.HttpClient.get(this.url + `sections/${id}`)
       .pipe(catchError(this.errorHttpHandler))
   }
 

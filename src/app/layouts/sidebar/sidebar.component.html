@@ -81,8 +81,7 @@
             <button
               type="button"
               class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100   {{
-                router.url.includes('categories') ||
-                router.url.includes('projects')
+                router.url.includes('categories')
                   ? 'active'
                   : ''
               }}"
@@ -159,19 +158,10 @@
             </ul>
           </li>
           <li>
-            <a
-              routerLink="/projects"
-              routerLinkActive="active"
-              class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100"
-              >Project</a
-            >
-          </li>
-          <li>
             <button
               type="button"
               class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100   {{
-                router.url.includes('categories') ||
-                router.url.includes('projects')
+                router.url.includes('project')
                   ? 'active'
                   : ''
               }}"
@@ -189,7 +179,7 @@
               <span
                 class="flex-1 ml-3 text-left whitespace-nowrap"
                 sidebar-toggle-item
-                >Document</span
+                >Project</span
               >
               <svg
                 sidebar-toggle-item
@@ -208,7 +198,7 @@
             <ul id="dropdown-3" class="hidden py-2 space-y-2">
               <li>
                 <a
-                  routerLink="/categories"
+                  routerLink="/projects/pjd"
                   routerLinkActive="active"
                   class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100"
                   >PJD</a
@@ -216,7 +206,7 @@
               </li>
               <li>
                 <a
-                  routerLink="/categories"
+                  routerLink="/projects/psd"
                   routerLinkActive="active"
                   class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100"
                   >PSD</a
@@ -224,7 +214,7 @@
               </li>
               <li>
                 <a
-                  routerLink="/categories"
+                  routerLink="/projects/rmd"
                   routerLinkActive="active"
                   class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100"
                   >RMD</a
@@ -232,7 +222,7 @@
               </li>
               <li>
                 <a
-                  routerLink="/categories"
+                  routerLink="/projects/pmd"
                   routerLinkActive="active"
                   class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100"
                   >PMD</a

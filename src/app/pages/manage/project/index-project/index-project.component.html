@@ -1,10 +1,10 @@
 <div class="block p-3 bg-white border border-gray-200 rounded-lg shadow">
   <div class="flex justify-between py-2 align-middle">
-    <h5 class="px-3 mb-2 text-2xl font-bold tracking-tight text-gray-900">
-      List Projects
+    <h5 class="px-3 mb-2 font-bold tracking-tight text-gray-900 md:text-base lg:text-2xl sm:text-sm">
+      List Projects {{ sectionFound.code }} ({{ sectionFound.name }})
     </h5>
     <a
-      routerLink="/createProject"
+      routerLink="/projectCreate"
       class="text-white bg-gradient-to-r from-[#A4BE7B] via-[#5F8D4E] to-[#285430] hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 h-fit"
     >
       <i class="fa-solid fa-circle-plus"></i> Create
@@ -36,7 +36,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr
+        <tr class="bg-white border-b" *ngIf="!projects.length;else show">
+          <td colspan="4" class="px-6 py-4">Belum ada data.</td>
+        </tr>
+        <ng-template #show>
+          <tr
           class="bg-white border-b"
           *ngFor="
             let item of projects
@@ -58,7 +62,7 @@
           </td>
           <td class="px-6 py-4">
             <a
-              routerLink="/projects/{{ item.id }}"
+              routerLink="/projectShow/{{ item.id }}"
               class="text-white bg-gradient-to-r from-[#53CDE2] via-[#0278AE] to-[#005792] hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 w-fit"
             >
               <i class="fa-solid fa-eye"></i> Show
@@ -66,14 +70,17 @@
             <a
               (click)="delete(item.id)"
               class="text-white bg-gradient-to-r from-red-500 via-red-600 to-red-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 w-fit"
+              style="cursor:pointer"
             >
               <i class="fa-solid fa-trash"></i> Delete
             </a>
           </td>
         </tr>
+        </ng-template>
+
       </tbody>
     </table>
-    <div *ngIf="projects.length" class="m-3 text-center">
+    <div *ngIf="projects.length >= 10" class="m-3 text-center">
       <pagination-controls (pageChange)="p = $event"></pagination-controls>
     </div>
   </div>

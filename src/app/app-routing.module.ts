@@ -18,9 +18,12 @@ const routes: Routes = [
   { path: 'createCategories', component: CreateCategoryComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'projects', component: IndexProjectComponent },
-  { path: 'projects/:id', component: EditProjectComponent },
-  { path: 'createProject', component: CreateProjectComponent },
+  { path: 'projects/pjd', component: IndexProjectComponent },
+  { path: 'projects/psd', component: IndexProjectComponent },
+  { path: 'projects/rmd', component: IndexProjectComponent },
+  { path: 'projects/pmd', component: IndexProjectComponent },
+  { path: 'projectShow/:id', component: EditProjectComponent },
+  { path: 'projectCreate', component: CreateProjectComponent },
 ];
 
 @NgModule({

@@ -24,6 +24,9 @@ export class DashboardComponent implements OnInit {
   constructor(private elementRef: ElementRef, public ControlService: ControlService, private router: Router, private cookieService: CookieService) { }
   // public chart: any;
 
+  // card
+  nameProject:any[] = [];
+  progressProject:any[] = [];
   projectChart: any;
   ngOnInit(): void {
     const token = this.cookieService.get('progressDevToken');
@@ -56,17 +59,60 @@ export class DashboardComponent implements OnInit {
     });
 
     // Get Project
-    this.ControlService.getProjects().subscribe((res: any) => {
-      this.name = res.map((item: any) => item.name);
-      this.progress = res.map((item: any) => item.progress);
-      this.projectChart = new Chart("progressChart", {
+    // this.ControlService.getProjects("pjd").subscribe((res: any) => {
 
+    //   this.name = res.projects.map((item: any) => item.name);
+    //   this.progress = res.projects.map((item: any) => item.progress);
+    //   this.projectChart = new Chart("progressChart2", {
+
+    //     type: 'bar',
+    //     data: {
+    //       labels: this.name,
+    //       datasets: [{
+    //         label: 'Progress',
+    //         data: this.progress,
+    //         borderWidth: 0,
+    //         borderRadius: 20,
+    //         backgroundColor: [
+    //           'rgba(255, 99, 132)',
+    //           'rgba(54, 162, 235)',
+    //           'rgba(255, 206, 86)',
+    //           'rgba(75, 192, 192)',
+    //           'rgba(153, 102, 255)',
+    //           'rgba(255, 159, 64)'
+    //         ],
+    //       }]
+    //     },
+    //     options: {
+    //       responsive: true,
+    //       maintainAspectRatio: false,
+    //       scales: {
+    //         // Menambahkan % pada yAxis
+    //         y: {
+    //           beginAtZero: true,
+    //           max: 100,
+    //           ticks: {
+    //             callback: function (value: any) {
+    //               return value + '%';
+    //             }
+    //           }
+    //         },
+
+    //       }
+    //     }
+    //   })
+    // })
+    this.ControlService.getAllProjects().subscribe((res: any) => {
+      this.progressProject = res.map((item: any) => item.project);
+      console.log(this.progressProject[0][0].progress);
+
+      this.projectChart = new Chart("progressChart1", {
         type: 'bar',
         data: {
-          labels: this.name,
+          labels: [this.progressProject[0][0].name],
           datasets: [{
             label: 'Progress',
-            data: this.progress,
+            data: [this.progressProject[0][0].progress],
             borderWidth: 0,
             borderRadius: 20,
             backgroundColor: [
