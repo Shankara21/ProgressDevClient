@@ -14,6 +14,8 @@ export class IndexProjectComponent {
   itemsPerPage: number = 10;
   totalProduct: any;
 
+  success = false;
+
   // search
   term: any;
 
@@ -31,6 +33,10 @@ export class IndexProjectComponent {
     })
   }
   delete(id: any) {
+    this.success = true;
+    setTimeout(() => {
+      this.success = false;
+    }, 3000);
     this.ControlService.deleteProject(id).subscribe((data: any) => {
       this.ControlService.getProjects(this.params).subscribe((data: any) => {
         this.projects = data.projects;

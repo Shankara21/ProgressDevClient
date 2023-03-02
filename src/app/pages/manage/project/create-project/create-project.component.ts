@@ -32,9 +32,11 @@ export class CreateProjectComponent implements OnInit {
   }
   updateSelectedValues() {
     this.selectedValues = this.categories.filter(item => item.checked).map(item => item.code);
+    console.log(this.selectedValues);
   }
   submit() {
     this.form.value.category = this.selectedValues;
+
     if (this.form.value.name == '') {
       this.errorMsg = 'Please enter project name';
     } else {

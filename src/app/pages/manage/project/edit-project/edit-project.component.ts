@@ -38,6 +38,8 @@ export class EditProjectComponent implements OnInit {
   // search
   term: any;
 
+  success = false;
+
   paramsId = this.router.url.split('/')[2];
 
   // Default Array
@@ -142,7 +144,7 @@ export class EditProjectComponent implements OnInit {
       id: new FormControl('', [Validators.required]),
     })
   }
-  obstacleSubmit(){
+  obstacleSubmit() {
     this.obstacleForm.value.id = this.paramsId;
     this.ControlService.createObstacle(this.obstacleForm.value).subscribe((data: any) => {
       this.ControlService.showProject(this.paramsId).subscribe((data: any) => {
@@ -172,7 +174,12 @@ export class EditProjectComponent implements OnInit {
     formData.append('document', this.document, this.document.name);
 
     this.ControlService.updateProjectDetails(formData).subscribe((data: any) => {
-      console.log(data);
+      // mengubah nilai success hanya dalam 5 detik
+      this.success = true;
+      setTimeout(() => {
+        this.success = false;
+      }, 3000);
+
       this.ControlService.getByStatus(0, this.paramsId).subscribe((data: any) => {
         this.tempOnProgress = data;
         this.projectsProgress = this.tempOnProgress.projectDone;
