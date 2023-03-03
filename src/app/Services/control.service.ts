@@ -74,6 +74,14 @@ export class ControlService {
     return this.HttpClient.delete(this.url + `projectdetails/${params}`)
       .pipe(catchError(this.errorHttpHandler))
   }
+  filterByYear(year: any, section: any) {
+    return this.HttpClient.get(this.url + `projects/year/${year}/${section}`)
+      .pipe(catchError(this.errorHttpHandler))
+  }
+  filterALLChartYear(year: any) {
+    return this.HttpClient.get(this.url + `projects/filterAllByYear/${year}`)
+      .pipe(catchError(this.errorHttpHandler))
+  }
 
   // ProjectsDetails
   createProjectDetails(params: any) {

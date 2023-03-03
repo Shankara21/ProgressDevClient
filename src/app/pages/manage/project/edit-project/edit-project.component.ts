@@ -195,6 +195,7 @@ export class EditProjectComponent implements OnInit {
         // console.log(this.detailsProject);
 
         this.progress = data.progress;
+        
         this.chartOptions = {
           series: [this.progress],
           chart: {

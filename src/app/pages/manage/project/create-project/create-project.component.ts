@@ -15,8 +15,23 @@ export class CreateProjectComponent implements OnInit {
   categories: any[] = [];
   form!: FormGroup;
   selectedValues: any[] = [];
+  tempSelectedValues: any[] = [];
   sections: any[] = []
   redirect: any;
+  months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December'
+  ]
   ngOnInit(): void {
     this.ControlService.getCategories().subscribe((data: any) => {
       this.categories = data.map((item: any) => ({ ...item, checked: false }));
@@ -28,11 +43,11 @@ export class CreateProjectComponent implements OnInit {
       name: new FormControl('', [Validators.required]),
       category: new FormControl('', [Validators.required]),
       sectionId: new FormControl('', [Validators.required]),
+      targetTime: new FormControl('', [Validators.required]),
     })
   }
   updateSelectedValues() {
     this.selectedValues = this.categories.filter(item => item.checked).map(item => item.code);
-    console.log(this.selectedValues);
   }
   submit() {
     this.form.value.category = this.selectedValues;

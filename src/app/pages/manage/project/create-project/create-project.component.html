@@ -79,13 +79,29 @@
         </option>
       </select>
     </div>
-    <div class="lg:w-3/6">
+    <div class="lg:w-2/6">
+      <label
+        for="countries"
+        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >Target Time</label
+      >
+      <select
+        id="countries"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+        formControlName="targetTime"
+      >
+        <option value="{{ item }}" *ngFor="let item of months">
+          {{ item }}
+        </option>
+      </select>
+    </div>
+    <div class="">
       <label
         for="first_name"
         class="block mb-2 text-sm font-medium text-gray-900"
         >Categories</label
       >
-      <div class="columns-2">
+      <div class="lg:columns-4 max-sm:columns-2">
         <div
           class="flex items-center p-1 pl-3 m-1 bg-white border rounded-xl"
           *ngFor="let item of categories; index as i"
