@@ -1,10 +1,6 @@
-<div
-  class="block p-3 bg-white border border-gray-200 rounded-lg shadow  "
->
-  <div class="flex justify-between align-middle py-2">
-    <h5
-      class="mb-2 text-2xl font-bold tracking-tight text-gray-900  px-3"
-    >
+<div class="block p-3 bg-white border border-gray-200 rounded-lg shadow">
+  <div class="flex justify-between py-2 align-middle">
+    <h5 class="px-3 mb-2 text-2xl font-bold tracking-tight text-gray-900">
       List Categories
     </h5>
     <a
@@ -15,24 +11,20 @@
     </a>
   </div>
   <div class="w-1/5 m-3 max-sm:w-1/2">
-    <label
-      for="first_name"
-      class="block mb-2 text-sm font-medium text-gray-900 "
+    <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900"
       >Search</label
     >
     <input
       type="text"
       id="first_name"
       [(ngModel)]="term"
-      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-[#A0C3D2] focus:border-[#A0C3D2] block w-full p-2.5  rounded-xl"
+      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-[#A0C3D2] focus:border-[#A0C3D2] block w-full p-2.5 rounded-xl"
       placeholder="Input here..."
     />
   </div>
   <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-    <table class="w-full text-sm text-center text-gray-500 ">
-      <thead
-        class="text-xs text-gray-700 uppercase bg-gray-50  "
-      >
+    <table class="w-full text-sm text-center text-gray-500">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50">
         <tr>
           <th scope="col" class="px-6 py-3">No</th>
           <th scope="col" class="px-6 py-3">Code</th>
@@ -45,7 +37,7 @@
       </thead>
       <tbody>
         <tr
-          class="bg-white border-b   hover:bg-gray-50 "
+          class="bg-white border-b hover:bg-gray-50"
           *ngFor="
             let item of categories
               | filter : term
@@ -55,9 +47,9 @@
         >
           <th
             scope="row"
-            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
+            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
           >
-            {{ i + 1 }}
+            {{ item.index + 1 }}
           </th>
           <!-- <td class="px-6 py-4">Silver</td> -->
           <td class="px-6 py-4">{{ item.code }}</td>
@@ -65,13 +57,13 @@
           <td class="px-6 py-4">
             <a
               routerLink="/categories/{{ item.id }}"
-              class="text-gray-800 bg-gradient-to-r from-[#FFEB99] via-[#FDD998] to-[#F5B971] hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+              class="text-gray-800 bg-gradient-to-r from-[#FFEB99] via-[#FDD998] to-[#F5B971] hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
             >
               <i class="fa-solid fa-pen-to-square"></i> Edit
             </a>
             <a
               (click)="delete(item.id)"
-              class="text-white bg-gradient-to-r from-red-500 via-red-600 to-red-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+              class="text-white bg-gradient-to-r from-red-500 via-red-600 to-red-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
             >
               <i class="fa-solid fa-trash"></i> Delete
             </a>
@@ -79,7 +71,7 @@
         </tr>
       </tbody>
     </table>
-    <div *ngIf="categories.length" class="text-center m-3">
+    <div *ngIf="categories.length" class="m-3 text-center">
       <pagination-controls (pageChange)="p = $event"></pagination-controls>
     </div>
   </div>

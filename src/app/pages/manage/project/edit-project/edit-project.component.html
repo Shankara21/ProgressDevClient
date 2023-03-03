@@ -301,9 +301,12 @@
           Belum ada obstacle
         </p>
         <ng-template #show>
-          <ul class="max-w-md space-y-1 text-gray-500 list-disc list-inside">
+          <ul
+            class="max-w-md space-y-1 overflow-auto text-gray-500 list-disc list-inside"
+          >
             <li>{{ detailsProject.obstacle }}</li>
           </ul>
+          <p class="overflow-auto">{{ detailsProject.obstacle }}</p>
         </ng-template>
       </div>
     </div>
@@ -362,6 +365,13 @@
           </div>
         </form>
       </div>
+    </div>
+    <div
+      class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+    >
+      <span class="font-normal text-gray-700 dark:text-gray-400">
+       
+      </span>
     </div>
   </div>
 </div>

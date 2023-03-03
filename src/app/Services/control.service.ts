@@ -141,6 +141,12 @@ export class ControlService {
       .pipe(catchError(this.errorHttpHandler))
   }
 
+  // SectionCategory
+  getSectionCategories(params: any) {
+    return this.HttpClient.get(this.url + `sectioncategories/${params}`)
+      .pipe(catchError(this.errorHttpHandler))
+  }
+
   //////////////////////
   //!/ Http Methods ///
   ////////////////////

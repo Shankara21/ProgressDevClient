@@ -73,6 +73,7 @@
         id="countries"
         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
         formControlName="sectionId"
+        (change)="getSection()"
       >
         <option value="{{ item.id }}" *ngFor="let item of sections">
           {{ item.code }} ({{ item.name }})
@@ -101,9 +102,9 @@
         class="block mb-2 text-sm font-medium text-gray-900"
         >Categories</label
       >
-      <div class="lg:columns-4 max-sm:columns-2">
+      <div class="lg:columns-3 max-sm:columns-2">
         <div
-          class="flex items-center p-1 pl-3 m-1 bg-white border rounded-xl"
+          class="flex items-center p-1 pl-3 m-3 bg-white border rounded-xl"
           *ngFor="let item of categories; index as i"
         >
           <input
@@ -117,7 +118,7 @@
           <label
             for="{{ i + 1 }}"
             class="w-full py-3 ml-2 text-sm font-medium text-gray-900"
-            >{{ item.code }} ({{ item.name }})</label
+            >{{ item.name }}</label
           >
         </div>
       </div>

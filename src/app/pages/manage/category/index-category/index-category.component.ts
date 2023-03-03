@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./index-category.component.css']
 })
 export class IndexCategoryComponent {
-  constructor(public ControlService: ControlService) { }
+  constructor(public ControlService: ControlService, private router:Router) { }
 
   isShow: boolean = false;
 
@@ -20,16 +20,24 @@ export class IndexCategoryComponent {
   // search
   term: any;
 
+  // params
+  params = this.router.url.split('/')[2];
 
   categories:any[] = [];
   ngOnInit(): void {
-    this.ControlService.getCategories().subscribe((data: any) => { 
-      this.categories = data;
+    console.log(this.params);
+
+    this.ControlService.getSectionCategories(this.params).subscribe((data: any) => {
+      data.sectionCategories.forEach((element: any) => {
+        this.categories.push(element.Category);
+      })
+      this.categories = this.categories.map((item: any) => ({ ...item, index: this.categories.indexOf(item) }));
+
     })
   }
   delete(id: any) {
     this.ControlService.deleteCategory(id).subscribe((data: any) => {
-      this.ControlService.getCategories().subscribe((data: any) => { 
+      this.ControlService.getCategories().subscribe((data: any) => {
         this.categories = data;
       })
     })

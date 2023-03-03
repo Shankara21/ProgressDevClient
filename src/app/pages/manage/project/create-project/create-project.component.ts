@@ -32,10 +32,13 @@ export class CreateProjectComponent implements OnInit {
     'November',
     'December'
   ]
+
+  getSectionName: any;
+  tempCategories: any[] = [];
   ngOnInit(): void {
-    this.ControlService.getCategories().subscribe((data: any) => {
-      this.categories = data.map((item: any) => ({ ...item, checked: false }));
-    });
+    // this.ControlService.getCategories().subscribe((data: any) => {
+    //   this.categories = data.map((item: any) => ({ ...item, checked: false }));
+    // });
     this.ControlService.getSections().subscribe((data: any) => {
       this.sections = data;
     })
@@ -62,5 +65,19 @@ export class CreateProjectComponent implements OnInit {
         });
       })
     }
+  }
+  getSection() {
+    this.ControlService.showSection(this.form.value.sectionId).subscribe((data: any) => {
+      this.getSectionName = data.code;
+      this.ControlService.getSectionCategories(this.getSectionName).subscribe((data: any) => {
+        console.log(data.sectionCategories);
+        data.sectionCategories.forEach((element: any) => {
+          this.categories.push(element.Category);
+        })
+
+        this.categories = this.categories.map((item: any) => ({ ...item, checked: false }));
+
+      })
+    })
   }
 }

@@ -70,18 +70,10 @@
         </button>
         <ul id="dropdown-example" class="hidden py-2 space-y-2">
           <li>
-            <a
-              routerLink="/categories"
-              routerLinkActive="active"
-              class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100"
-              >Category</a
-            >
-          </li>
-          <li>
             <button
               type="button"
               class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100   {{
-                router.url.includes('categories')
+                router.url.includes('documents')
                   ? 'active'
                   : ''
               }}"
@@ -118,7 +110,7 @@
             <ul id="dropdown-2" class="hidden py-2 space-y-2">
               <li>
                 <a
-                  routerLink="/categories"
+                  routerLink="/documents/pjd"
                   routerLinkActive="active"
                   class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100"
                   >PJD</a
@@ -126,7 +118,7 @@
               </li>
               <li>
                 <a
-                  routerLink="/categories"
+                  routerLink="/documents/psd"
                   routerLinkActive="active"
                   class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100"
                   >PSD</a
@@ -134,7 +126,7 @@
               </li>
               <li>
                 <a
-                  routerLink="/categories"
+                  routerLink="/documents/rmd"
                   routerLinkActive="active"
                   class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100"
                   >RMD</a
@@ -142,7 +134,7 @@
               </li>
               <li>
                 <a
-                  routerLink="/categories"
+                  routerLink="/documents/pmd"
                   routerLinkActive="active"
                   class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100"
                   >PMD</a

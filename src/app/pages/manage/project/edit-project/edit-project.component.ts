@@ -191,11 +191,8 @@ export class EditProjectComponent implements OnInit {
         // console.log(this.tempDone);
       })
       this.ControlService.showProject(this.paramsId).subscribe((data: any) => {
-        // this.detailsProject = data;
-        // console.log(this.detailsProject);
-
         this.progress = data.progress;
-        
+
         this.chartOptions = {
           series: [this.progress],
           chart: {
