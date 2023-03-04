@@ -39,6 +39,12 @@ export class DashboardComponent implements OnInit {
 
   // form
   allChart!: FormGroup;
+
+  psdChart!: FormGroup;
+  pjdChart!: FormGroup;
+  rmdChart!: FormGroup;
+  pmdChart!: FormGroup;
+
   ngOnInit(): void {
     const token = this.cookieService.get('progressDevToken');
 
@@ -50,7 +56,6 @@ export class DashboardComponent implements OnInit {
       refreshToken: new FormControl(token)
     })
 
-    // mengecek apakah ada yang login
     this.ControlService.refreshToken(this.refreshToken.value).subscribe((res: any) => {
       this.decoded = jwt_decode(res.accessToken);
       this.ControlService.username = this.decoded.username;
@@ -69,21 +74,14 @@ export class DashboardComponent implements OnInit {
       }
     });
     const startYear = 2023
-    // years bersifat dinamis dari tahun sekarang dan 5 tahun selanjutnya
     for (let i = startYear; i < new Date().getFullYear() + 6; i++) {
       this.years.push(i)
     }
     this.ControlService.getAllProjects().subscribe((res: any) => {
       this.progressProject = res.map((item: any) => item.project);
-      console.log("AWAL");
-
-      console.log(this.progressProject[0]);
-
-
 
       const tempProjectName = this.progressProject[0].map((item: any) => item.name);
       let tempProjectProgress = this.progressProject[0].map((item: any) => item.progress);
-
 
       this.projectChart = new Chart("progressChart1", {
         type: 'bar',
@@ -246,6 +244,23 @@ export class DashboardComponent implements OnInit {
 
     this.allChart = new FormGroup({
       year: new FormControl('', Validators.required)
+    })
+
+    this.pjdChart = new FormGroup({
+      year: new FormControl('', Validators.required),
+      section: new FormControl('pjd', Validators.required)
+    })
+    this.psdChart = new FormGroup({
+      year: new FormControl('', Validators.required),
+      section: new FormControl('psd', Validators.required)
+    })
+    this.rmdChart = new FormGroup({
+      year: new FormControl('', Validators.required),
+      section: new FormControl('rmd', Validators.required)
+    })
+    this.pmdChart = new FormGroup({
+      year: new FormControl('', Validators.required),
+      section: new FormControl('pmd', Validators.required)
     })
   }
 
@@ -445,4 +460,204 @@ export class DashboardComponent implements OnInit {
 
     // this.ControlService.filterALLChartYear
   }
+
+  filterPJDChart() {
+    this.pjdChart.value.year = Number(this.pjdChart.value.year)
+    this.ControlService.filterChartBySection(this.pjdChart.value.section, this.pjdChart.value.year).subscribe((res: any) => {
+      let tempPJD = res.projects;
+      const tempPJDName = tempPJD.map((item: any) => item.name);
+      const tempPJDProgress = tempPJD.map((item: any) => item.progress);
+      if (this.projectChart) {
+        this.projectChart.destroy();
+      }
+      this.projectChart = new Chart("progressChart1", {
+        type: 'bar',
+        data: {
+          labels: tempPJDName,
+          datasets: [{
+            label: 'Progress',
+            data: tempPJDProgress,
+            borderWidth: 0,
+            borderRadius: 20,
+            backgroundColor: [
+              '#D61355',
+              '#F94A29',
+              '#FCE22A',
+              '#30E3DF',
+              '#FFB830',
+              '#3B14A7'
+            ],
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            // Menambahkan % pada yAxis
+            y: {
+              beginAtZero: true,
+              max: 100,
+              ticks: {
+                callback: function (value: any) {
+                  return value + '%';
+                }
+              }
+            },
+
+          }
+        }
+      })
+
+    })
+
+  }
+
+  filterPSDChart() {
+    this.psdChart.value.year = Number(this.psdChart.value.year)
+    this.ControlService.filterChartBySection(this.psdChart.value.section, this.psdChart.value.year).subscribe((res: any) => {
+      let tempPSD = res.projects;
+      const tempPSDName = tempPSD.map((item: any) => item.name);
+      const tempPSDProgress = tempPSD.map((item: any) => item.progress);
+      if (this.prosessChart) {
+        this.prosessChart.destroy();
+      }
+      this.prosessChart = new Chart("progressChart2", {
+        type: 'bar',
+        data: {
+          labels: tempPSDName,
+          datasets: [{
+            label: 'Progress',
+            data: tempPSDProgress,
+            borderWidth: 0,
+            borderRadius: 20,
+            backgroundColor: [
+              '#EB5353',
+              '#F9D923',
+              '#36AE7C',
+              '#187498',
+              '#4D96FF',
+              '#E4508F'
+            ],
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            // Menambahkan % pada yAxis
+            y: {
+              beginAtZero: true,
+              max: 100,
+              ticks: {
+                callback: function (value: any) {
+                  return value + '%';
+                }
+              }
+            },
+
+          }
+        }
+      })
+
+    })
+  }
+
+  filterRMDChart() {
+    this.rmdChart.value.year = Number(this.rmdChart.value.year)
+    this.ControlService.filterChartBySection(this.rmdChart.value.section, this.rmdChart.value.year).subscribe((res: any) => {
+      let tempRMD = res.projects;
+      const tempRMDName = tempRMD.map((item: any) => item.name);
+      const tempRMDProgress = tempRMD.map((item: any) => item.progress);
+      if (this.rawChart) {
+        this.rawChart.destroy();
+      }
+      this.rawChart = new Chart("progressChart3", {
+        type: 'bar',
+        data: {
+          labels: tempRMDName,
+          datasets: [{
+            label: 'Progress',
+            data: tempRMDProgress,
+            borderWidth: 0,
+            borderRadius: 20,
+            backgroundColor: [
+              '#0081C9',
+              '#5BC0F8',
+              '#F49D1A',
+              '#B01E68',
+              '#7743DB',
+              '#379237'
+            ],
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            // Menambahkan % pada yAxis
+            y: {
+              beginAtZero: true,
+              max: 100,
+              ticks: {
+                callback: function (value: any) {
+                  return value + '%';
+                }
+              }
+            },
+          }
+        }
+      })
+    }
+    )
+  }
+
+  filterPMDChart() {
+    this.pmdChart.value.year = Number(this.pmdChart.value.year)
+    this.ControlService.filterChartBySection(this.pmdChart.value.section, this.pmdChart.value.year).subscribe((res: any) => {
+      let tempPMD = res.projects;
+      const tempPMDName = tempPMD.map((item: any) => item.name);
+      const tempPMDProgress = tempPMD.map((item: any) => item.progress);
+      if (this.packagingChart) {
+        this.packagingChart.destroy();
+      }
+      this.packagingChart = new Chart("progressChart4", {
+        type: 'bar',
+        data: {
+          labels: tempPMDName,
+          datasets: [{
+            label: 'Progress',
+            data: tempPMDProgress,
+            borderWidth: 0,
+            borderRadius: 20,
+            backgroundColor: [
+              '#53BF9D',
+              '#F94C66',
+              '#BD4291',
+              '#FFC54D',
+              '#F900BF',
+              '#FF1700'
+            ],
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            // Menambahkan % pada yAxis
+            y: {
+              beginAtZero: true,
+              max: 100,
+              ticks: {
+                callback: function (value: any) {
+                  return value + '%';
+                }
+              }
+            },
+          }
+        }
+      })
+    }
+    )
+  }
+
 }

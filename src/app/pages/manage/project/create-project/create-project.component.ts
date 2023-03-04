@@ -35,6 +35,8 @@ export class CreateProjectComponent implements OnInit {
 
   getSectionName: any;
   tempCategories: any[] = [];
+
+  error = false;
   ngOnInit(): void {
     // this.ControlService.getCategories().subscribe((data: any) => {
     //   this.categories = data.map((item: any) => ({ ...item, checked: false }));
@@ -56,7 +58,23 @@ export class CreateProjectComponent implements OnInit {
     this.form.value.category = this.selectedValues;
 
     if (this.form.value.name == '') {
+      this.error = true;
+      setTimeout(() => {
+        this.error = false;
+      }, 3000);
       this.errorMsg = 'Please enter project name';
+    } else if (this.form.value.targetTime == '') {
+      this.error = true;
+      setTimeout(() => {
+        this.error = false;
+      }, 3000);
+      this.errorMsg = 'Please select target time';
+    } else if (this.form.value.sectionId == '') {
+      this.error = true;
+      setTimeout(() => {
+        this.error = false;
+      }, 3000);
+      this.errorMsg = 'Please select section';
     } else {
       this.ControlService.showSection(this.form.value.sectionId).subscribe((data: any) => {
         this.redirect = data.code;
@@ -67,16 +85,15 @@ export class CreateProjectComponent implements OnInit {
     }
   }
   getSection() {
+    this.categories = [];
     this.ControlService.showSection(this.form.value.sectionId).subscribe((data: any) => {
       this.getSectionName = data.code;
       this.ControlService.getSectionCategories(this.getSectionName).subscribe((data: any) => {
-        console.log(data.sectionCategories);
         data.sectionCategories.forEach((element: any) => {
           this.categories.push(element.Category);
         })
-
         this.categories = this.categories.map((item: any) => ({ ...item, checked: false }));
-
+        console.log(this.categories);
       })
     })
   }

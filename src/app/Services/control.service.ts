@@ -82,6 +82,10 @@ export class ControlService {
     return this.HttpClient.get(this.url + `projects/filterAllByYear/${year}`)
       .pipe(catchError(this.errorHttpHandler))
   }
+  filterChartBySection(section: any, year: any) {
+    return this.HttpClient.get(this.url + `projects/filterBySection/${year}/${section}`)
+      .pipe(catchError(this.errorHttpHandler))
+  }
 
   // ProjectsDetails
   createProjectDetails(params: any) {
