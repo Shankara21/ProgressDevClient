@@ -1,8 +1,10 @@
+import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { ControlService } from 'src/app/Services/control.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Chart, registerables } from 'chart.js';
+import jwt_decode from 'jwt-decode';
 import {
   ApexNonAxisChartSeries,
   ApexPlotOptions,
@@ -28,8 +30,13 @@ Chart.register(...registerables)
 export class EditProjectComponent implements OnInit {
   @ViewChild("chart") chart!: ChartComponent;
   public chartOptions: Partial<ChartOptions> | any;
-  constructor(public ControlService: ControlService, private router: Router) {
+  constructor(public ControlService: ControlService, private router: Router, private cookieService:CookieService) {
   }
+  // auth
+  decoded: any;
+  refreshToken: any;
+  id: any
+
   // pagination
   p: number = 1;
   itemsPerPage: number = 10;
@@ -71,7 +78,36 @@ export class EditProjectComponent implements OnInit {
 
   // create obstacle
   obstacleForm!: FormGroup;
+  showModal = false;
+  isiText: any;
   ngOnInit(): void {
+    const token = this.cookieService.get('progressDevToken');
+
+    if (!this.cookieService.get('progressDevToken')) {
+      this.router.navigate(['/login']);
+    }
+
+    this.refreshToken = new FormGroup({
+      refreshToken: new FormControl(token)
+    })
+
+    this.ControlService.refreshToken(this.refreshToken.value).subscribe((res: any) => {
+      this.decoded = jwt_decode(res.accessToken);
+      this.ControlService.username = this.decoded.username;
+      this.ControlService.email = this.decoded.email;
+      this.ControlService.fullname = this.decoded.fullname;
+      this.ControlService.userLevel = this.decoded.userLevel;
+      this.ControlService.id = this.decoded.id;
+      this.id = this.decoded.id;
+
+
+      this.ControlService.data = {
+        username: this.decoded.username,
+        email: this.decoded.email,
+        fullname: this.decoded.fullname,
+        userLevel: this.decoded.userLevel
+      }
+    });
 
     this.ControlService.getByStatus(0, this.paramsId).subscribe((data: any) => {
       this.tempOnProgress = data;
@@ -92,6 +128,7 @@ export class EditProjectComponent implements OnInit {
 
     this.ControlService.showProject(this.paramsId).subscribe((data: any) => {
       this.detailsProject = data;
+      this.isiText = this.detailsProject.obstacle;
       this.progress = data.progress;
       this.chartOptions = {
         series: [this.progress],
@@ -145,6 +182,7 @@ export class EditProjectComponent implements OnInit {
     })
   }
   obstacleSubmit() {
+    this.showModal = false;
     this.obstacleForm.value.id = this.paramsId;
     this.ControlService.createObstacle(this.obstacleForm.value).subscribe((data: any) => {
       this.ControlService.showProject(this.paramsId).subscribe((data: any) => {

@@ -9,6 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
   constructor(public router: Router, public controlService: ControlService) { }
+  showMenu = false;
+  showDocument = false;
+  showProject = false;
   ngOnInit(): void {
   }
 }

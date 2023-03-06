@@ -11,16 +11,7 @@
           routerLinkActive="active"
           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-100"
         >
-          <svg
-            aria-hidden="true"
-            class="w-6 h-6 text-gray-700 transition duration-75 group-hover:text-gray-900"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
-            <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
-          </svg>
+          <i class="fa-solid fa-chart-pie"></i>
           <span class="ml-3">Dashboard</span>
         </a>
       </li>
@@ -31,83 +22,50 @@
             router.url.includes('categories') || router.url.includes('projects')
               ? 'active'
               : ''
-          }}"
-          aria-controls="dropdown-example"
-          data-collapse-toggle="dropdown-example"
+          }} "
+          (click)="showMenu = !showMenu"
         >
-          <svg
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-            class="flex-shrink-0 w-6 h-6 text-gray-700 transition duration-75 group-hover:text-gray-900"
-            aria-hidden="true"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3.75 12h.007v.008H3.75V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-.375 5.25h.007v.008H3.75v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
-            ></path>
-          </svg>
+          <i class="fa-solid fa-list"></i>
           <span
             class="flex-1 ml-3 text-left whitespace-nowrap"
             sidebar-toggle-item
             >Manage</span
           >
-          <svg
-            sidebar-toggle-item
-            class="w-6 h-6"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-              clip-rule="evenodd"
-            ></path>
-          </svg>
+          <i
+            class="{{
+              showMenu
+                ? 'fa-solid fa-chevron-down'
+                : 'fa-solid fa-chevron-right'
+            }}"
+          ></i>
         </button>
-        <ul id="dropdown-example" class="hidden py-2 space-y-2">
+        <ul
+          id="dropdown-example"
+          class="{{ !showMenu && 'hidden' }} py-2 space-y-2"
+        >
           <li>
             <button
               type="button"
               class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100   {{
-                router.url.includes('documents')
-                  ? 'active'
-                  : ''
-              }}"
-              aria-controls="dropdown-2"
-              data-collapse-toggle="dropdown-2"
+                router.url.includes('documents') ? 'active' : ''
+              }} pl-6"
+              (click)="showDocument = !showDocument"
             >
-              <svg
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-                class="flex-shrink-0 w-6 h-6 text-gray-700 transition duration-75 group-hover:text-gray-900"
-                aria-hidden="true"
-              ></svg>
+              <i class="fa-solid fa-file"></i>
               <span
                 class="flex-1 ml-3 text-left whitespace-nowrap"
                 sidebar-toggle-item
                 >Document</span
               >
-              <svg
-                sidebar-toggle-item
-                class="w-6 h-6"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                  clip-rule="evenodd"
-                ></path>
-              </svg>
+              <i
+            class="{{
+              showDocument
+                ? 'fa-solid fa-chevron-down'
+                : 'fa-solid fa-chevron-right'
+            }}"
+          ></i>
             </button>
-            <ul id="dropdown-2" class="hidden py-2 space-y-2">
+            <ul id="dropdown-2" class="{{ !showDocument && 'hidden' }} py-2 space-y-2 pl-6">
               <li>
                 <a
                   routerLink="/documents/pjd"
@@ -153,41 +111,25 @@
             <button
               type="button"
               class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100   {{
-                router.url.includes('project')
-                  ? 'active'
-                  : ''
-              }}"
-              aria-controls="dropdown-3"
-              data-collapse-toggle="dropdown-3"
+                router.url.includes('project') ? 'active' : ''
+              }} pl-6"
+              (click)="showProject = !showProject"
             >
-              <svg
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-                class="flex-shrink-0 w-6 h-6 text-gray-700 transition duration-75 group-hover:text-gray-900"
-                aria-hidden="true"
-              ></svg>
+              <i class="fa-solid fa-folder-open"></i>
               <span
                 class="flex-1 ml-3 text-left whitespace-nowrap"
                 sidebar-toggle-item
                 >Project</span
               >
-              <svg
-                sidebar-toggle-item
-                class="w-6 h-6"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                  clip-rule="evenodd"
-                ></path>
-              </svg>
+              <i
+            class="{{
+              showProject
+                ? 'fa-solid fa-chevron-down'
+                : 'fa-solid fa-chevron-right'
+            }}"
+          ></i>
             </button>
-            <ul id="dropdown-3" class="hidden py-2 space-y-2">
+            <ul id="dropdown-3" class="{{ !showProject && 'hidden' }} py-2 space-y-2 pl-6">
               <li>
                 <a
                   routerLink="/projects/pjd"
@@ -229,13 +171,6 @@
           </li> -->
             </ul>
           </li>
-          <!-- <li>
-            <a
-              href="#"
-              class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100"
-              >Invoice</a
-            >
-          </li> -->
         </ul>
       </li>
       <!-- <li>

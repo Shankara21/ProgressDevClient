@@ -215,10 +215,9 @@
       <div
         class="block w-full px-6 py-3 text-left bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100"
       >
-        <div class="flex justify-end" *ngIf="!detailsProject.obstacle">
+        <div class="flex justify-end">
           <button
-            data-modal-target="small-modal"
-            data-modal-toggle="small-modal"
+            (click)="showModal = true"
             class="block w-full md:w-auto text-white bg-[#F49D1A] hover:bg-[#FFC93C] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
             type="button"
           >
@@ -228,11 +227,13 @@
         <div
           id="small-modal"
           tabindex="-1"
-          class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full"
+          class="fixed z-50  {{
+            !showModal && 'hidden'
+          }} w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full flex justify-center content-center shadow-2xl"
         >
-          <div class="relative w-full h-full max-w-md md:h-auto">
+          <div class="relative w-full max-w-md flex items-center">
             <!-- Modal content -->
-            <div class="relative bg-white rounded-lg shadow">
+            <div class="relative bg-[#F5F5F5] rounded-lg shadow w-full">
               <!-- Modal header -->
               <div
                 class="flex items-center justify-between p-2 border-b rounded-t"
@@ -241,7 +242,7 @@
                 <button
                   type="button"
                   class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex"
-                  data-modal-hide="small-modal"
+                  (click)="showModal = false"
                 >
                   <svg
                     aria-hidden="true"
@@ -268,14 +269,14 @@
                       class="block mb-2 text-sm font-medium text-gray-900"
                       >Obstacle</label
                     >
-                    <input
-                      type="text"
-                      id="email"
-                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                      placeholder="Obstacle"
+                    <textarea
+                      id="message"
+                      rows="4"
+                      class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="Write your thoughts here..."
                       formControlName="obstacle"
-                      required
-                    />
+                      [(ngModel)]="isiText"
+                    ></textarea>
                   </div>
                   <button
                     type="submit"
@@ -301,12 +302,9 @@
           Belum ada obstacle
         </p>
         <ng-template #show>
-          <ul
-            class="max-w-md space-y-1 overflow-auto text-gray-500 list-disc list-inside"
-          >
-            <li>{{ detailsProject.obstacle }}</li>
-          </ul>
-          <p class="overflow-auto">{{ detailsProject.obstacle }}</p>
+          <div class="overflow-y-auto">
+            {{ detailsProject.obstacle }}
+          </div>
         </ng-template>
       </div>
     </div>
@@ -331,7 +329,7 @@
                 *ngFor="let item of projectsProgress; index as i"
                 value="{{ item.Category.id }}"
               >
-                {{ item.Category.code }} ({{ item.Category.name }})
+                {{ item.Category.name }}
               </option>
             </select>
           </div>
@@ -365,13 +363,6 @@
           </div>
         </form>
       </div>
-    </div>
-    <div
-      class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
-    >
-      <span class="font-normal text-gray-700 dark:text-gray-400">
-       
-      </span>
     </div>
   </div>
 </div>
