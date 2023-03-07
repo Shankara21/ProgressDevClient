@@ -23,8 +23,15 @@ export class LoginComponent implements OnInit {
     });
   }
   submit() {
+    if (this.form.invalid) {
+      this.errorMsg = 'Please enter valid email and password';
+      setTimeout(() => {
+        this.errorMsg = null;
+      }, 2000);
+      return;
+    }
     this.ControlService.login(this.form.value).subscribe((res: any) => {
-      this.cookieService.set('progressDevToken', res.token, 4 / 24 );
+      this.cookieService.set('progressDevToken', res.token, 4 / 24);
       this.router.navigate(['/dashboard']);
     }, (err: any) => {
       this.errorMsg = err.error.message;

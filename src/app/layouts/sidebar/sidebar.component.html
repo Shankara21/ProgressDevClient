@@ -58,14 +58,17 @@
                 >Document</span
               >
               <i
-            class="{{
-              showDocument
-                ? 'fa-solid fa-chevron-down'
-                : 'fa-solid fa-chevron-right'
-            }}"
-          ></i>
+                class="{{
+                  showDocument
+                    ? 'fa-solid fa-chevron-down'
+                    : 'fa-solid fa-chevron-right'
+                }}"
+              ></i>
             </button>
-            <ul id="dropdown-2" class="{{ !showDocument && 'hidden' }} py-2 space-y-2 pl-6">
+            <ul
+              id="dropdown-2"
+              class="{{ !showDocument && 'hidden' }} py-2 space-y-2 pl-6"
+            >
               <li>
                 <a
                   routerLink="/documents/pjd"
@@ -122,14 +125,17 @@
                 >Project</span
               >
               <i
-            class="{{
-              showProject
-                ? 'fa-solid fa-chevron-down'
-                : 'fa-solid fa-chevron-right'
-            }}"
-          ></i>
+                class="{{
+                  showProject
+                    ? 'fa-solid fa-chevron-down'
+                    : 'fa-solid fa-chevron-right'
+                }}"
+              ></i>
             </button>
-            <ul id="dropdown-3" class="{{ !showProject && 'hidden' }} py-2 space-y-2 pl-6">
+            <ul
+              id="dropdown-3"
+              class="{{ !showProject && 'hidden' }} py-2 space-y-2 pl-6"
+            >
               <li>
                 <a
                   routerLink="/projects/pjd"
