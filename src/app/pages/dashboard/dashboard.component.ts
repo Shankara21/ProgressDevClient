@@ -64,8 +64,6 @@ export class DashboardComponent implements OnInit {
       this.ControlService.userLevel = this.decoded.userLevel;
       this.ControlService.id = this.decoded.id;
       this.id = this.decoded.id;
-
-
       this.ControlService.data = {
         username: this.decoded.username,
         email: this.decoded.email,

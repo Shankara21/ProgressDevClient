@@ -23,17 +23,29 @@ export class RegisterComponent implements OnInit {
     });
   }
   submit() {
-    if (this.form.invalid) {
-      this.errorMsg = 'Please fill all the fields correctly';
+    // if (this.form.invalid) {
+    //   this.errorMsg = 'Please fill all the fields correctly';
+    //   setTimeout(() => {
+    //     this.errorMsg = null;
+    //   }, 2000);
+    //   return;
+    // }
+    this.ControlService.register(this.form.value).subscribe((res: any) => {
+      this.route.navigate(['/login']);
+    }, (err: any) => {
+      this.errorMsg = []
+      if (err.error.message.length > 1) {
+        err.error.message.map((item: any) => {
+          // console.log(item.message);
+          this.errorMsg.push(item.message);
+        })
+      }
       setTimeout(() => {
         this.errorMsg = null;
       }, 2000);
       return;
-    }
-    this.ControlService.register(this.form.value).subscribe((res: any) => {
-      this.route.navigate(['/login']);
-    }, (err: any) => {
-      this.errorMsg = err.error.message;
+
+
     });
   }
 }

@@ -36,5 +36,9 @@ export class LoginComponent implements OnInit {
     }, (err: any) => {
       this.errorMsg = err.error.message;
     });
+    setTimeout(() => {
+      this.errorMsg = null;
+    }, 2000);
+    return;
   }
 }

@@ -1,8 +1,9 @@
+import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { ControlService } from 'src/app/Services/control.service';
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Location } from '@angular/common';
+import jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-index-project',
@@ -10,7 +11,12 @@ import { Location } from '@angular/common';
   styleUrls: ['./index-project.component.css']
 })
 export class IndexProjectComponent {
-  constructor(private ControlService: ControlService, private router: Router, private location:Location) { }
+  constructor(private ControlService: ControlService, private router: Router, private cookieService: CookieService) { }
+  // auth
+  decoded: any;
+  refreshToken: any;
+  id: any
+
   // pagination
   p: number = 1;
   itemsPerPage: number = 10;
@@ -33,7 +39,31 @@ export class IndexProjectComponent {
   form!: FormGroup;
 
   ngOnInit(): void {
-    console.log('INI ROUTE');
+    const token = this.cookieService.get('progressDevToken');
+
+    if (!this.cookieService.get('progressDevToken')) {
+      this.router.navigate(['/login']);
+    }
+
+    this.refreshToken = new FormGroup({
+      refreshToken: new FormControl(token)
+    })
+
+    this.ControlService.refreshToken(this.refreshToken.value).subscribe((res: any) => {
+      this.decoded = jwt_decode(res.accessToken);
+      this.ControlService.username = this.decoded.username;
+      this.ControlService.email = this.decoded.email;
+      this.ControlService.fullname = this.decoded.fullname;
+      this.ControlService.userLevel = this.decoded.userLevel;
+      this.ControlService.id = this.decoded.id;
+      this.id = this.decoded.id;
+      this.ControlService.data = {
+        username: this.decoded.username,
+        email: this.decoded.email,
+        fullname: this.decoded.fullname,
+        userLevel: this.decoded.userLevel
+      }
+    });
     // history location sebelum sekarang
 
     // menampilkan route sekarang
@@ -48,7 +78,7 @@ export class IndexProjectComponent {
     }
     this.form = new FormGroup({
       year: new FormControl('', [Validators.required]),
-      code : new FormControl('', [Validators.required]),
+      code: new FormControl('', [Validators.required]),
     })
   }
   delete(id: any) {
