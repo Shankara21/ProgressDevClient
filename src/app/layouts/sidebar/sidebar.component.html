@@ -1,6 +1,6 @@
 <aside
   id="logo-sidebar"
-  class="fixed top-0 left-0 z-40 lg:w-[20%] h-screen pt-[70px] py-4 px-2 transition-transform -translate-x-full sm:translate-x-0"
+  class="fixed top-0 left-0 z-40 md:w-[20%] h-screen pt-[70px] py-4 px-2 transition-transform -translate-x-full sm:translate-x-0 max-md:hidden"
   aria-label="Sidebar"
 >
   <div class="h-full p-3 overflow-y-auto bg-[#FFB830] rounded-xl">
@@ -49,7 +49,7 @@
               class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100   {{
                 router.url.includes('documents') ? 'active' : ''
               }} pl-6"
-              (click)="showDocument = !showDocument"
+              (click)="showDocument = !showDocument;showProject = false"
             >
               <i class="fa-solid fa-file"></i>
               <span
@@ -116,7 +116,7 @@
               class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100   {{
                 router.url.includes('project') ? 'active' : ''
               }} pl-6"
-              (click)="showProject = !showProject"
+              (click)="showProject = !showProject;showDocument = false"
             >
               <i class="fa-solid fa-folder-open"></i>
               <span

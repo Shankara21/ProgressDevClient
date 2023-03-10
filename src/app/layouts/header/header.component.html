@@ -42,22 +42,23 @@
         <div class="flex items-center ml-3">
           <div>
             <button
-              type="button"
-              class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300"
-              aria-expanded="false"
-              data-dropdown-toggle="dropdown-user"
+              class="flex text-sm bg-gray-800 rounded-full focus:ring-4"
+              (click)="showMenu = !showMenu"
             >
               <span class="sr-only">Open user menu</span>
               <img
                 class="w-8 h-8 rounded-full"
-                src="\assets\img\user.png"
+                src="assets/img/user.png"
                 alt="user photo"
               />
             </button>
           </div>
           <div
-            class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 shadow rounded-xl"
-            id="dropdown-user"
+            class="{{ showMenu ? 'absolute' : 'hidden' }} z-50 mx-4 my-4 text-base list-none bg-white divide-y divide-gray-100 shadow  w-44 rounded-xl"
+            style="
+            transform: translate3d(-140px,85px,0px);
+            /* transform: translateX(-145px); */
+            "
           >
             <div class="px-4 py-3" role="none">
               <p class="text-sm text-gray-900" role="none">
@@ -68,7 +69,7 @@
               </p>
             </div>
             <ul class="py-1" role="none">
-              <li>
+              <!-- <li>
                 <a
                   href="#"
                   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
@@ -91,7 +92,7 @@
                   role="menuitem"
                   >Earnings</a
                 >
-              </li>
+              </li> -->
               <li>
                 <a
                   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"

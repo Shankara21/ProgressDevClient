@@ -30,7 +30,7 @@ Chart.register(...registerables)
 export class EditProjectComponent implements OnInit {
   @ViewChild("chart") chart!: ChartComponent;
   public chartOptions: Partial<ChartOptions> | any;
-  constructor(public ControlService: ControlService, private router: Router, private cookieService:CookieService) {
+  constructor(public ControlService: ControlService, private router: Router, private cookieService: CookieService) {
   }
   // auth
   decoded: any;
@@ -45,7 +45,9 @@ export class EditProjectComponent implements OnInit {
   // search
   term: any;
 
-  success = false;
+  success: any;
+
+  showDocument = false;
 
   paramsId = this.router.url.split('/')[2];
 
@@ -195,7 +197,9 @@ export class EditProjectComponent implements OnInit {
     console.log(this.document);
   }
   getPath(params: any, name: any) {
-    this.path = `http://localhost:3000/${params}`
+    this.showDocument = true;
+    this.path = `http://192.168.9.47:3737/${params}`
+    console.log(this.path);
     this.documentName = name;
   }
   submit() {
@@ -213,9 +217,9 @@ export class EditProjectComponent implements OnInit {
 
     this.ControlService.updateProjectDetails(formData).subscribe((data: any) => {
       // mengubah nilai success hanya dalam 5 detik
-      this.success = true;
+      this.success = 'Progress Project updated successfully!';
       setTimeout(() => {
-        this.success = false;
+        this.success = null;
       }, 3000);
 
       this.ControlService.getByStatus(0, this.paramsId).subscribe((data: any) => {

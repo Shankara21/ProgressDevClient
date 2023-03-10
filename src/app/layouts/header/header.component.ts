@@ -25,6 +25,8 @@ export class HeaderComponent implements OnInit {
   refreshToken: any;
   decoded: any;
   id: any;
+
+  showMenu = false
   ngOnInit(): void {
     setInterval(() => {
       this.dateNow = new Date();
